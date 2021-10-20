@@ -1,0 +1,128 @@
+{% extends 'main.html'  %}
+{% block content %}
+
+
+
+<!-- =========MESSAGES========== -->
+<center>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alret--{{message.tags}}">
+        <p class="alert__message">{{message}}</p>
+     
+      </div>
+    {% endfor %}
+    {% endif %}
+
+
+
+{% if page == 'register' %}
+<!-- =================SIGN UP =============== -->
+
+<h1>Hello this is Signup  </h1>
+
+<div class="content">
+    <div class="text">
+       SignUp Form
+       
+    </div>
+    <div class="errors">
+      {% if error %}
+      {{error}}
+   {%endif%}
+   </div>
+    <form action="{%url 'register' %}" method="POST">
+        {% csrf_token%} 
+        <div class="field">
+         <input type="text" required name="username">
+         <span class="fas fa-user"></span>
+         <label>Username</label>
+      </div>
+      <div class="field">
+         <input type="text" required name="fn">
+         <span class="fas fa-user"></span>
+         <label>First name</label>
+      </div>
+      <div class="field">
+         <input type="text" required name="ln">
+         <span class="fas fa-user-circle"></span>
+         <label>Last Name</label>
+      </div>
+      <div class="field">
+         <input type="email" required name="email">
+         <span class="fas fa-email"></span>
+         <label>Email </label>
+      </div>
+      <div class="field">
+         <input type="text" required name="phone">
+         <span class="fas fa-lock"></span>
+         <label> Phone Number</label>
+      </div>
+      <div class="field">
+         <input type="password" name="pass" required>
+         <span class="fas fa-lock"></span>
+         <label>Password</label>
+      </div>
+      <div class="field">
+         <input type="password" name="passwordagain" required>
+         <span class="fas fa-lock"></span>
+         <label> Confirm Password</label>
+      </div>
+ </div>
+
+       <button value="Signup" type="submit">Sign Up</button>
+       <div class="sign-up">
+          Already a Member?
+          <a style="font-size: 30px;" href="{% url 'login' %}">Login here</a>
+       </div>
+    </form>
+ </div>
+
+{%  else %}
+<!-- =================LOGIN=============== -->
+<h1>Hello this is Login  </h1>
+
+<form action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form}}
+</form>
+<div class="content">
+    <div class="text">
+       Login Form
+       
+    </div>
+    <div class="errors">
+       {% if error %}
+       {{error}}
+    {%endif%}
+    </div>
+    <form action="{%url 'login' %}" method="POST">
+       {% csrf_token%}
+       <div class="field">
+          <input type="text" required name="username">
+          <span class="fas fa-user"></span>
+          <label>Username</label>
+       </div>
+       <div class="field">
+          <input type="password" name="pass" required>
+          <span class="fas fa-lock"></span>
+          <label>Password</label>
+       </div>
+       <!-- <div class="forgot-pass">
+          <a href="#">Forgot Password?</a>
+       </div> -->
+       <button value="Login" type="submit">Sign in</button>
+       <div class="sign-up">
+          Not a member?
+          <a href="{% url 'register' %}">SignUp  here</a>
+       </div>
+    </form>
+ </div>
+
+{% endif %}
+{% endblock content %}
+
+<!-- 
+    EXTENDS
+LOGIN
+SIGNUP -->

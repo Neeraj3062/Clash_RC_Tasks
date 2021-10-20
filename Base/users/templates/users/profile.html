@@ -1,0 +1,14 @@
+{% extends 'main.html'  %}
+{% block content %}
+<h1>Hello this is Profile</h1>
+{% for d in data%}
+
+<h2>{{user.username}}</h2>
+<h3>{{d.first_name}} {{d.last_name}}</h3>
+<h3>{{d.email}}</h3>
+{% endfor  %}
+
+<a href="{% url 'home' %}">Back Home</a>
+
+
+{% endblock content %}
